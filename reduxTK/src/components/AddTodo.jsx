@@ -12,7 +12,21 @@ const AddTodo = () => {
     setInput("");
   };
   return (
-    <form onSubmit={addTodoHandler}>
+    <form
+      onSubmit={addTodoHandler}
+      style={{
+        display: "flex",
+        gap: "10px",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "20px",
+        marginBottom: "20px",
+        backgroundColor: "#f5f5f5",
+        padding: "20px",
+        borderRadius: "8px",
+        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+      }}
+    >
       <input
         type="text"
         placeholder="Add todo"
