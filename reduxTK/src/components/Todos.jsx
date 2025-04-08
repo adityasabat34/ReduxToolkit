@@ -5,8 +5,8 @@ import { removeTodo } from "../feature/todo/todoSlice";
 
 const Todos = () => {
   const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos || []); // Ensure todos is an array
 
-  const todos = useSelector((state) => state.todos);
   return (
     <>
       <h1
@@ -25,7 +25,6 @@ const Todos = () => {
       <ul
         style={{
           listStyle: "none",
-
           margin: "0",
           display: "flex",
           flexDirection: "column",
@@ -38,40 +37,53 @@ const Todos = () => {
           boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
         }}
       >
-        {todos.map((todo) => (
-          <li
-            style={{
-              display: "flex",
-              gap: "10px",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: "10px",
-              borderRadius: "8px",
-              backgroundColor: "#fff",
-              boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-            }}
-            key={todo.id}
-          >
-            {todo.text}
-            <button
+        {todos.length > 0 ? (
+          todos.map((todo) => (
+            <li
               style={{
-                marginLeft: "10px",
-                backgroundColor: "red",
-                color: "white",
-                border: "none",
-                padding: "5px",
-                borderRadius: "4px",
-                cursor: "pointer",
-                fontSize: "14px",
-                fontWeight: "bold",
+                display: "flex",
+                gap: "10px",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "10px",
+                borderRadius: "8px",
+                backgroundColor: "#fff",
                 boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
               }}
-              onClick={() => dispatch(removeTodo(todo.id))}
+              key={todo.id}
             >
-              X
-            </button>
+              {todo.text}
+              <button
+                style={{
+                  marginLeft: "10px",
+                  backgroundColor: "red",
+                  color: "white",
+                  border: "none",
+                  padding: "5px",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  fontSize: "14px",
+                  fontWeight: "bold",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                }}
+                onClick={() => dispatch(removeTodo(todo.id))}
+              >
+                X
+              </button>
+            </li>
+          ))
+        ) : (
+          <li
+            style={{
+              padding: "10px",
+              color: "#777",
+              fontSize: "16px",
+              textAlign: "center",
+            }}
+          >
+            No todos available
           </li>
-        ))}
+        )}
       </ul>
     </>
   );
