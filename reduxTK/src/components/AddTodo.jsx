@@ -8,9 +8,12 @@ const AddTodo = () => {
 
   const addTodoHandler = (e) => {
     e.preventDefault();
-    dispatch(addTodo(input));
-    setInput("");
+    if (input.trim()) {
+      dispatch(addTodo(input));
+      setInput("");
+    }
   };
+
   return (
     <form
       onSubmit={addTodoHandler}
@@ -59,6 +62,7 @@ const AddTodo = () => {
           cursor: "pointer",
           transition: "background-color 0.3s ease-in-out",
         }}
+        disabled={!input.trim()}
       >
         Add
       </button>
